@@ -46,7 +46,7 @@ with tab2:
 
 
 with st.expander("What is the silhoutte score?"):
-    st.info("the silhoutte score, ranging from -1.0 to 1.0, measures how similar an object is to its assigned cluster. Values closer to 1 indicate better-defined clusters, while values near 0 indicate overlapping clusters and that a point may be near the boundary for two different clusters.")
+    st.info("the silhoutte score, ranging from -1.0 to 1.0, measures how similar an object is to its assigned cluster. Values closer to 1 indicate better-defined clusters, while values near 0 indicate overlapping clusters and that a point may be near the boundary for two different clusters. They are helpful indicators of cluster quality!")
 
 st.markdown("Want to explore the raw data?")
 tabA, tabB = st.tabs(["Original Data", "Without 'American'"])
