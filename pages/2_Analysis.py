@@ -48,6 +48,27 @@ with tab2:
 with st.expander("What is the silhoutte score?"):
     st.info("the silhoutte score, ranging from -1.0 to 1.0, measures how similar an object is to its assigned cluster. Values closer to 1 indicate better-defined clusters, while values near 0 indicate overlapping clusters and that a point may be near the boundary for two different clusters. They are helpful indicators of cluster quality!")
 
+
+tab3, tab4, tab5 = st.tabs(["Original Data", "Without 'American'", "Combined"])
+
+with tab3:
+    number1 = df.groupby("cluster")["PageTitle"].count().reset_index(name='count')
+    fig1Bar = px.bar(number1, x='cluster', y='count', title="Number of People per cluster", labels={"number1":"Number of People"})
+    st.plotly_chart(fig1Bar, use_container_width=True)
+
+with tab4:
+    number2 = df2.groupby("cluster")["PageTitle"].count().reset_index(name='count')
+    fig2Bar = px.bar(number2, x='cluster', y='count', title="Number of People per cluster", labels={"number2":"Number of People"})
+    st.plotly_chart(fig2Bar, use_container_width=True)
+
+with tab5:
+    number1["Data"] = "Original"
+    number2["Data"] = "Without 'American'"
+    combined = pd.concat([number1,number2])
+    fig3Bar = px.bar(combined, x="cluster", y='count', color='Data', barmode='overlay', title="Comparison: People per Cluster",
+                     color_discrete_map={ "Original": "blue", "Without 'American'": "orange"})
+    st.plotly_chart(fig3Bar, use_container_width=True)
+
 st.markdown("Want to explore the raw data?")
 tabA, tabB = st.tabs(["Original Data", "Without 'American'"])
 
@@ -55,30 +76,30 @@ visCols = ['PageTitle','description','occupation_labels','cluster','topClusterWo
 randomIndex = np.random.randint(0, df.shape[0] - 10)
 
 with tabA:
-        colSearch = st.selectbox("choose a column to search", options=visCols, key='tabA')
-        search = st.text_input("Search:", "", key='tabAsearch')
+    colSearch = st.selectbox("choose a column to search", options=visCols, key='tabA')
+    search = st.text_input("Search:", "", key='tabAsearch')
 
-        if search:
-            results = df[df[colSearch].astype(str).str.contains(search, case=False, na=False)]
-            st.markdown(f"Found {len(results)} results for '{search}' in column '{colSearch}':")
-            st.table(results[visCols].head(10))
-        else:
-            st.markdown("Displaying 10 random rows of the raw data:")
-            if st.button("Reshuffle random columns", key='reshuffleA'):
-                randomIndex = np.random.randint(0, df.shape[0] - 10)
-            st.table(df.iloc[randomIndex:randomIndex+10, 1:6])
+    if search:
+        results = df[df[colSearch].astype(str).str.contains(search, case=False, na=False)]
+        st.markdown(f"Found {len(results)} results for '{search}' in column '{colSearch}':")
+        st.table(results[visCols].head(10))
+    else:
+        st.markdown("Displaying 10 random rows of the raw data:")
+        if st.button("Reshuffle random columns", key='reshuffleA'):
+            randomIndex = np.random.randint(0, df.shape[0] - 10)
+        st.table(df.iloc[randomIndex:randomIndex+10, 1:6])
 
 with tabB:
-        colSearch2 = st.selectbox("choose a column to search", options=visCols, key='tabB')
-        search2 = st.text_input("Search:", "", key='tabBsearch')
+    colSearch2 = st.selectbox("choose a column to search", options=visCols, key='tabB')
+    search2 = st.text_input("Search:", "", key='tabBsearch')
 
-        if search2:
-            results2 = df2[df2[colSearch2].astype(str).str.contains(search2, case=False, na=False)]
-            st.markdown(f"Found {len(results2)} results for '{search2}' in column '{colSearch2}':")
-            st.table(results2[visCols].head(10))
-        else:
-            st.markdown("Displaying 10 random rows of the raw data:")
-            if st.button("Reshuffle random columns", key='reshuffleB'):
-                randomIndex = np.random.randint(0, df.shape[0] - 10)
-            st.table(df2.iloc[randomIndex:randomIndex+10, 1:6])
+    if search2:
+        results2 = df2[df2[colSearch2].astype(str).str.contains(search2, case=False, na=False)]
+        st.markdown(f"Found {len(results2)} results for '{search2}' in column '{colSearch2}':")
+        st.table(results2[visCols].head(10))
+    else:
+        st.markdown("Displaying 10 random rows of the raw data:")
+        if st.button("Reshuffle random columns", key='reshuffleB'):
+            randomIndex = np.random.randint(0, df.shape[0] - 10)
+        st.table(df2.iloc[randomIndex:randomIndex+10, 1:6])
 

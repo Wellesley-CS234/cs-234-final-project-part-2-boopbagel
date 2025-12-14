@@ -13,7 +13,7 @@ st.title("Cluster Visualization of Female Scientists on Wikipedia")
     #research question
 st.header(""" *Research Question:* """)
 st.write("How well does unsupervised clustering work on female scientists based on short descriptions gathered from WikIData API calls? Will any biases or trends emerge?")
-st.markdown("To answer this question, data was collected using the Wikimedia API client on the WikiProject Women Scientists. Out of 27k total articles, the first 16.5k articles were collected, with the rest ommitted for  being rated as 'start' or 'stub' with a rating of '???'. This was  done due to time constraints and ensuring the pages collected would have enough information.")
+st.markdown("To answer this question, data was collected using the Wikimedia API client on the WikiProject Women Scientists. Out of 27k total articles, the first 16.5k articles were collected, with the rest ommitted for their progress label as 'start' or 'stub' with importance ratings of '???'. This was  done due to time constraints and ensuring the pages collected would have enough information.")
 st.markdown("QIDs (the identifier for articles), page titles, descriptions, and occupation labels were collected and organized in a CSV file.")
 st.markdown("Check out the [WikiProject Women Scientists Here!](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Women_scientists)")
 
