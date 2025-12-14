@@ -30,7 +30,7 @@ else:
     randomIndex = np.random.randint(0, df.shape[0] - 10)
     if st.button("Reshuffle random columns"):
         randomIndex = np.random.randint(0, df.shape[0] - 10)
-    st.info("Use the search box to explore the data")
+    st.info("Use the search box to explore the data, or click the 'reshuffle' button")
     st.table(df.iloc[randomIndex:randomIndex+10, 1:6])
 
 st.markdown("Navigate to the Analysis page in the sidebar to learn more about the data!")
