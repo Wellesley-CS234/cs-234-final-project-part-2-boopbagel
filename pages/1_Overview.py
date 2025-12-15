@@ -19,6 +19,7 @@ st.markdown("Check out the [WikiProject Women Scientists Here!](https://en.wikip
 
 
 st.header("Preview or Search The Collected Raw Data!")
+st.metric(label='Articles', value=df.shape[0])
 columnSearch = st.selectbox("choose a column to search", options=['PageTitle','description', 'occupation_labels'])
 search = st.text_input("Search:", "")
 if search:
